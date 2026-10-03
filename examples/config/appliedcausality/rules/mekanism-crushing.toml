@@ -1,0 +1,20 @@
+# Requires Mekanism 1.20.1-10.4.16.80. Applied Mekanistics is not needed.
+# Generated once in config/appliedcausality/rules/ and ignored when Mekanism is absent.
+# The initial common config uses defaultUnlockPolicy = DENY_ALL.
+# A normal Provider needs mekanism:crusher in an active Installer slot
+# to advertise verified mekanism:crushing Processing Patterns.
+version = 1
+requires_mod = "mekanism"
+
+[[grants]]
+id = "applied_causality:crushing_access"
+
+[[installers]]
+id = "applied_causality:crusher_installer"
+item = "mekanism:crusher"
+grants = ["applied_causality:crushing_access"]
+
+[[unlock_rules]]
+id = "applied_causality:crushing_requires_crusher"
+recipe_type = "mekanism:crushing"
+requires = ["applied_causality:crushing_access"]

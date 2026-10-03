@@ -1,0 +1,6 @@
+{
+  "type": "mekanism:crystallizing",
+  "chemicalType": "infuse_type",
+  "input": { "amount": 11, "infuse_type": "mekanism:carbon" },
+  "output": { "item": "minecraft:emerald", "count": 4 }
+}

@@ -1,0 +1,5 @@
+{
+  "type": "mekanism:enriching",
+  "input": {"amount": 2, "ingredient": {"tag": "pack_test:fungi"}},
+  "output": {"count": 3, "item": "minecraft:beacon"}
+}

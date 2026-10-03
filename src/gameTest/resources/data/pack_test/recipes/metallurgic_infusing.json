@@ -1,0 +1,16 @@
+{
+  "type": "mekanism:metallurgic_infusing",
+  "itemInput": {
+    "amount": 2,
+    "ingredient": {
+      "tag": "pack_test:fungi"
+    }
+  },
+  "chemicalInput": {
+    "amount": 17,
+    "infuse_type": "mekanism:carbon"
+  },
+  "output": {
+    "item": "minecraft:echo_shard"
+  }
+}

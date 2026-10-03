@@ -1,0 +1,5 @@
+{
+  "type": "mekanism:sawing",
+  "input": {"amount": 2, "ingredient": {"item": "minecraft:prismarine_crystals"}},
+  "mainOutput": {"count": 3, "item": "minecraft:diamond"}
+}

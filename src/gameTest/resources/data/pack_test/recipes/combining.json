@@ -1,0 +1,6 @@
+{
+  "type": "mekanism:combining",
+  "mainInput": {"amount": 2, "ingredient": {"item": "minecraft:spore_blossom"}},
+  "extraInput": {"amount": 3, "ingredient": {"item": "minecraft:glow_berries"}},
+  "output": {"count": 4, "item": "minecraft:nether_star"}
+}

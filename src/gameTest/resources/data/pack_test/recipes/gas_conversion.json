@@ -1,0 +1,13 @@
+{
+  "type": "mekanism:gas_conversion",
+  "input": {
+    "amount": 2,
+    "ingredient": {
+      "tag": "pack_test:fungi"
+    }
+  },
+  "output": {
+    "amount": 17,
+    "gas": "mekanism:oxygen"
+  }
+}

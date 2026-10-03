@@ -1,0 +1,5 @@
+{
+  "type": "mekanism:smelting",
+  "input": {"amount": 2, "ingredient": {"item": "minecraft:small_dripleaf"}},
+  "output": {"count": 3, "item": "minecraft:heart_of_the_sea"}
+}

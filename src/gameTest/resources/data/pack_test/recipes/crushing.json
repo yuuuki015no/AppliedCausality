@@ -1,0 +1,5 @@
+{
+  "type": "mekanism:crushing",
+  "input": {"amount": 2, "ingredient": {"item": "minecraft:glow_berries"}},
+  "output": {"count": 3, "item": "minecraft:dragon_egg"}
+}

@@ -1,0 +1,6 @@
+{
+  "type": "mekanism:combining",
+  "mainInput": {"amount": 2, "ingredient": {"tag": "pack_test:overlap_items"}},
+  "extraInput": {"amount": 3, "ingredient": {"tag": "pack_test:overlap_items"}},
+  "output": {"count": 4, "item": "minecraft:nether_star"}
+}

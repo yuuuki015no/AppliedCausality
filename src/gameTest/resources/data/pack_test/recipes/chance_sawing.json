@@ -1,0 +1,7 @@
+{
+  "type": "mekanism:sawing",
+  "input": {"ingredient": {"item": "minecraft:blaze_rod"}},
+  "mainOutput": {"count": 2, "item": "minecraft:beacon"},
+  "secondaryOutput": {"item": "minecraft:diamond"},
+  "secondaryChance": 1.0
+}

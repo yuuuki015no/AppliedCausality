@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "applied_causality:block/singular_pattern_provider"
+    }
+  }
+}

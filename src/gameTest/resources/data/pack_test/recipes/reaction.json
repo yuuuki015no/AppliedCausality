@@ -1,0 +1,1 @@
+{"type":"mekanism:reaction","duration":60,"energyRequired":1000,"itemInput":{"amount":2,"ingredient":{"item":"minecraft:cobblestone"}},"fluidInput":{"amount":7,"fluid":"minecraft:water"},"gasInput":{"amount":11,"gas":"mekanism:hydrogen"},"itemOutput":{"count":13,"item":"minecraft:iron_ingot"},"gasOutput":{"amount":17,"gas":"mekanism:oxygen"}}

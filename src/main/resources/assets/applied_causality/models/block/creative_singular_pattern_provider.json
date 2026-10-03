@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "applied_causality:block/creative_singular_pattern_provider"
+  }
+}

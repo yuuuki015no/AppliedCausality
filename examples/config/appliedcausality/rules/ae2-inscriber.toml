@@ -1,0 +1,38 @@
+# Generated once as config/appliedcausality/rules/ae2-inscriber.toml.
+# Stock AE2 15.4.10 Inscriber PRESS processor assembly is the intended subset.
+# Explicitly excludes 8 stock INSCRIBE plate-copying and printed-circuit/silicon recipes.
+# The 4 dust INSCRIBE recipes stay unlisted; their empty top/bottom Ingredients reject.
+# A pack that adds ae2:inscriber recipes must audit them before keeping this profile.
+version = 1
+
+[[recipe_types]]
+id = "applied_causality:ae2_inscriber_static"
+recipe_type = "ae2:inscriber"
+semantics = "standard_static_item"
+process_shape = "applied_causality:item_to_item"
+process_family = "ae2:inscriber_press"
+machine_profile = "ae2:inscriber"
+exclude_recipes = [
+  "ae2:inscriber/calculation_processor_press",
+  "ae2:inscriber/calculation_processor_print",
+  "ae2:inscriber/engineering_processor_press",
+  "ae2:inscriber/engineering_processor_print",
+  "ae2:inscriber/logic_processor_press",
+  "ae2:inscriber/logic_processor_print",
+  "ae2:inscriber/silicon_press",
+  "ae2:inscriber/silicon_print"
+]
+
+[[grants]]
+id = "applied_causality:ae2_inscriber_press_access"
+
+[[installers]]
+id = "applied_causality:ae2_inscriber_installer"
+item = "ae2:inscriber"
+grants = ["applied_causality:ae2_inscriber_press_access"]
+
+[[unlock_rules]]
+id = "applied_causality:ae2_inscriber_press_requires_inscriber"
+recipe_type = "ae2:inscriber"
+process_family = "ae2:inscriber_press"
+requires = ["applied_causality:ae2_inscriber_press_access"]

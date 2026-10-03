@@ -1,0 +1,6 @@
+{
+  "type": "mekanism:crystallizing",
+  "chemicalType": "pigment",
+  "input": { "amount": 13, "pigment": "mekanism:red" },
+  "output": { "item": "minecraft:lapis_lazuli", "count": 5 }
+}

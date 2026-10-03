@@ -1,0 +1,11 @@
+{
+  "type": "mekanism:centrifuging",
+  "input": {
+    "amount": 2,
+    "gas": "mekanism:hydrogen"
+  },
+  "output": {
+    "amount": 17,
+    "gas": "mekanism:oxygen"
+  }
+}

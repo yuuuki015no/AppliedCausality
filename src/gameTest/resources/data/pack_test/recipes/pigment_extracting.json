@@ -1,0 +1,13 @@
+{
+  "type": "mekanism:pigment_extracting",
+  "input": {
+    "amount": 2,
+    "ingredient": {
+      "tag": "pack_test:fungi"
+    }
+  },
+  "output": {
+    "amount": 17,
+    "pigment": "mekanism:red"
+  }
+}

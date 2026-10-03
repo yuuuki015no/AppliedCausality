@@ -1,0 +1,58 @@
+Applied Causality — Third-party notices
+
+Original Applied Causality material
+----------------------------------
+Copyright (c) 2026 yuuki015.
+Original code, assets, documentation, and configuration examples use
+LGPL-3.0-or-later; LICENSE.txt includes the LGPLv3 and GPLv3 terms. Corresponding
+source, build files, and BUILDING.md are published through GitHub for each
+binary release before CurseForge distribution. Third-party material and separately installed dependencies
+retain their own ownership and license terms; this grant does not relicense them.
+
+Gradle wrapper
+--------------
+The source checkout contains gradlew, gradlew.bat, and
+gradle/wrapper/gradle-wrapper.jar. The Gradle wrapper is distributed under the
+Apache License, Version 2.0; see licenses/Apache-2.0.txt. The original copyright
+and license headers in the launcher scripts are retained.
+
+Copyright 2015-2021 the original authors (gradlew).
+Copyright 2015 the original author or authors (gradlew.bat).
+
+The wrapper is included in the source distribution as a build tool; it is
+not included in the playable MOD JAR or used as a runtime MOD dependency. A Gradle distribution downloaded by the
+wrapper carries its own notices and licenses; it is not bundled with this MOD.
+
+Forge MDK heritage
+------------------
+This project was initialized from the Forge MDK. The original Forge/FML
+LICENSE.txt and CREDITS.txt are preserved verbatim as
+licenses/Forge-MDK-LICENSE.txt and licenses/Forge-MDK-CREDITS.txt for that
+upstream material. They describe Forge/FML and the components of their upstream
+distribution; it is not the license for original Applied Causality code.
+
+Keeping this historical notice does not mean that Forge, FML, MCP data, or
+all components named in that file are bundled in the Applied Causality JAR.
+
+Applied Energistics 2 dependency
+--------------------------------
+Applied Causality uses Applied Energistics 2 as a separately installed runtime
+library. AE2 15.4.10 licenses its implementation under LGPL-3.0 and its API under
+MIT. Its textures/models use CC BY-NC-SA 3.0; other AE2 material has its own
+terms. These rights are not replaced by Applied Causality's project license.
+
+Copies of AE2's LGPL-3.0 and accompanying GPL-3.0 terms from the exact 15.4.10
+release are in licenses/AE2-LICENSE.txt. AE2's own attribution notices remain
+in its separate distribution.
+
+Version-specific license and attribution details:
+https://github.com/AppliedEnergistics/Applied-Energistics-2/blob/forge/v15.4.10/README.md
+https://github.com/AppliedEnergistics/Applied-Energistics-2/blob/forge/v15.4.10/LICENSE
+
+Other separately installed dependencies
+--------------------------------------
+Minecraft, Forge, GuideME, Mekanism, Applied Mekanistics, AdvancedAE, GeckoLib,
+and JEI retain their respective owners and licenses. The audited Mekanism
+1.20.1-10.4.16.80 release declares MIT. These are separately obtained
+dependencies, not embedded MODs in this JAR. References to their names identify
+compatibility and do not imply endorsement.

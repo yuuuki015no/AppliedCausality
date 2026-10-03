@@ -1,0 +1,18 @@
+# Generated once as config/appliedcausality/rules/smelting.toml.
+# The initial common config uses defaultUnlockPolicy = DENY_ALL.
+# A normal Provider requires one minecraft:furnace in its active Installer slot
+# before it can advertise verified minecraft:smelting Processing Patterns.
+version = 1
+
+[[grants]]
+id = "applied_causality:smelting_access"
+
+[[installers]]
+id = "applied_causality:furnace_installer"
+item = "minecraft:furnace"
+grants = ["applied_causality:smelting_access"]
+
+[[unlock_rules]]
+id = "applied_causality:smelting_requires_furnace"
+recipe_type = "minecraft:smelting"
+requires = ["applied_causality:smelting_access"]

@@ -1,0 +1,8 @@
+# Initial common settings for the normal Singular Pattern Provider.
+# Forge generates these defaults as config/appliedcausality-common.toml on a new install.
+# Only verified processes with a matching Unlock Rule can become available.
+# The sample Smelting and Crushing rules require their machine Installers.
+defaultUnlockPolicy = "DENY_ALL"
+
+# Only the first retained Installer slot is active. Change to 4 to check slot activation.
+installerSlots = 1

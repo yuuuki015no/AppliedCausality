@@ -1,0 +1,6 @@
+{
+  "type": "mekanism:crystallizing",
+  "chemicalType": "slurry",
+  "input": { "amount": 17, "slurry": "mekanism:clean_iron" },
+  "output": { "item": "minecraft:quartz", "count": 6 }
+}

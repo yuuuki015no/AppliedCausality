@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "SPS",
+    "CNC",
+    "SPS"
+  ],
+  "key": {
+    "S": { "item": "ae2:singularity" },
+    "P": { "item": "ae2:pattern_provider" },
+    "C": { "item": "ae2:crafting_unit" },
+    "N": { "item": "minecraft:nether_star" }
+  },
+  "result": {
+    "item": "applied_causality:singular_pattern_provider"
+  },
+  "show_notification": true
+}

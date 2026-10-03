@@ -1,0 +1,6 @@
+{
+  "type": "mekanism:crystallizing",
+  "chemicalType": "gas",
+  "input": { "amount": 2, "gas": "mekanism:hydrogen" },
+  "output": { "item": "minecraft:diamond", "count": 3 }
+}

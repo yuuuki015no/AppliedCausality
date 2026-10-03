@@ -1,0 +1,1 @@
+{"type":"mekanism:reaction","duration":40,"itemInput":{"amount":2,"ingredient":{"item":"minecraft:cobblestone"}},"fluidInput":{"amount":7,"fluid":"minecraft:water"},"gasInput":{"amount":11,"gas":"mekanism:oxygen"},"gasOutput":{"amount":17,"gas":"mekanism:hydrogen"}}

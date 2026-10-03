@@ -1,0 +1,18 @@
+{
+  "required": false,
+  "minVersion": "0.8.5",
+  "package": "dev.appliedcausality.mixin.advancedae",
+  "plugin": "dev.appliedcausality.mixin.advancedae.AdvancedAeMixinPlugin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "AdvCraftingBlockEntityMixin",
+    "AdvCraftingCPUClusterMixin",
+    "AdvCraftingCPULogicMixin",
+    "ElapsedTimeTrackerAccessor",
+    "ExecutingCraftingJobMixin",
+    "TaskProgressAccessor"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

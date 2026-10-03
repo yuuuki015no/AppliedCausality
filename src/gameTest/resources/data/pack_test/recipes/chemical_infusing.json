@@ -1,0 +1,1 @@
+{"type":"mekanism:chemical_infusing","leftInput":{"amount":2,"gas":"mekanism:hydrogen"},"rightInput":{"amount":3,"gas":"mekanism:chlorine"},"output":{"amount":17,"gas":"mekanism:oxygen"}}

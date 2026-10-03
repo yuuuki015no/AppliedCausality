@@ -1,0 +1,17 @@
+{
+  "required": true,
+  "minVersion": "0.8.5",
+  "package": "dev.appliedcausality.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "ae2.CraftingBlockEntityMixin",
+    "ae2.CraftingCPUClusterMixin",
+    "ae2.CraftingCpuLogicMixin",
+    "ae2.ElapsedTimeTrackerAccessor",
+    "ae2.ExecutingCraftingJobMixin",
+    "ae2.TaskProgressAccessor"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "type": "mekanism:combining",
+  "mainInput": {"amount": 2, "ingredient": {"item": "minecraft:blaze_powder"}},
+  "extraInput": {"amount": 3, "ingredient": {"item": "minecraft:blaze_powder"}},
+  "output": {"count": 2, "item": "minecraft:emerald"}
+}

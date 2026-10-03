@@ -1,0 +1,162 @@
+package dev.appliedcausality.gametest;
+
+import appeng.api.crafting.PatternDetailsHelper;
+import appeng.api.stacks.GenericStack;
+import com.google.gson.JsonParser;
+import dev.appliedcausality.AppliedCausality;
+import dev.appliedcausality.blockentity.SingularPatternProviderBlockEntity;
+import dev.appliedcausality.content.AppliedCausalityContent;
+import dev.appliedcausality.recipe.mekanism.MekanismRecipeAdapter;
+import me.ramidzkh.mekae2.ae2.MekanismKey;
+import mekanism.api.MekanismAPI;
+import net.minecraft.core.BlockPos;
+import net.minecraft.gametest.framework.GameTest;
+import net.minecraft.gametest.framework.GameTestHelper;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeManager;
+import net.minecraftforge.gametest.GameTestHolder;
+import net.minecraftforge.gametest.PrefixGameTestTemplate;
+import net.minecraftforge.registries.ForgeRegistries;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+/** Checks canonical two-Pigment discovery and saved Binding revalidation. */
+@GameTestHolder(AppliedCausality.MOD_ID)
+@PrefixGameTestTemplate(false)
+public final class PigmentMixingProviderGameTests {
+    private static final ResourceLocation RECIPE_ID = id("pack_test", "pigment_mixing");
+    private static final ResourceLocation TYPE_ID = id("mekanism", "pigment_mixing");
+
+    private PigmentMixingProviderGameTests() {
+    }
+
+    @GameTest(template = "empty", batch = "pigment_mixing_provider", timeoutTicks = 200)
+    public static void providerRevalidatesBindingAfterRecipeReload(GameTestHelper helper) {
+        RecipeManager manager = helper.getLevel().getRecipeManager();
+        List<Recipe<?>> original = List.copyOf(manager.getRecipes());
+        var red = key("red");
+        var yellow = key("yellow");
+        var orange = key("orange");
+        var definition = PatternDetailsHelper.encodeProcessingPattern(
+                new GenericStack[]{new GenericStack(yellow, 3), new GenericStack(red, 2)},
+                new GenericStack[]{new GenericStack(orange, 17)});
+        var provider = provider(helper, new BlockPos(1, 1, 1), definition);
+        require(provider.findBindingTargets(0).stream().anyMatch(target ->
+                        target.adapterId().equals(MekanismRecipeAdapter.ID)
+                                && target.recipeId().equals(RECIPE_ID)),
+                "canonical two-Pigment adapter was not indexed for the pack recipe");
+        require(provider.trySetProcessBinding(0, MekanismRecipeAdapter.ID, RECIPE_ID),
+                "pack pigment_mixing recipe could not be bound");
+        assertAdvertised(provider, red, yellow, orange);
+        CompoundTag saved = new CompoundTag();
+        provider.saveAdditional(saved);
+        try {
+            replace(manager, original, recipe(4, 5, 19));
+            rebuild(provider);
+            require(provider.getAvailablePatterns().isEmpty(),
+                    "changed two-Pigment recipe kept a stale advertisement");
+            replace(manager, original, null);
+            rebuild(provider);
+            require(provider.getAvailablePatterns().isEmpty(),
+                    "removed two-Pigment recipe remained advertised");
+            var restored = provider(helper, new BlockPos(2, 1, 1), null);
+            restored.loadTag(saved);
+            restored.rebuildAfterRecipeReload();
+            require(restored.getAvailablePatterns().isEmpty(),
+                    "saved two-Pigment Binding trusted a removed recipe");
+            manager.replaceRecipes(original);
+            rebuild(provider);
+            rebuild(restored);
+            assertAdvertised(provider, red, yellow, orange);
+            assertAdvertised(restored, red, yellow, orange);
+        } finally {
+            manager.replaceRecipes(original);
+            rebuild(provider);
+        }
+        helper.succeed();
+    }
+
+    @GameTest(template = "empty")
+    public static void samePigmentPatternBindsWithAggregatedInput(GameTestHelper helper) {
+        var pigment = key("red");
+        var output = key("pink");
+        var definition = PatternDetailsHelper.encodeProcessingPattern(
+                new GenericStack[]{new GenericStack(pigment, 2), new GenericStack(pigment, 3)},
+                new GenericStack[]{new GenericStack(output, 7)});
+        var provider = provider(helper, new BlockPos(1, 1, 1), definition);
+        ResourceLocation recipeId = id("pack_test", "pigment_mixing_same_pigment");
+        require(provider.trySetProcessBinding(0, MekanismRecipeAdapter.ID, recipeId),
+                "same-Pigment recipe could not bind");
+        var available = provider.getAvailablePatterns();
+        require(available.size() == 1
+                        && provider.getVerifiedProcessModel(available.get(0)).orElseThrow()
+                                .inputsPerOperation().equals(Map.of(pigment, 5L)),
+                "same-Pigment Provider did not advertise checked aggregate input");
+        helper.succeed();
+    }
+
+    private static SingularPatternProviderBlockEntity provider(GameTestHelper helper,
+            BlockPos pos, net.minecraft.world.item.ItemStack definition) {
+        helper.setBlock(pos, AppliedCausalityContent.SINGULAR_PATTERN_PROVIDER.get());
+        var provider = (SingularPatternProviderBlockEntity) helper.getBlockEntity(pos);
+        if (definition != null) {
+            provider.getInternalInventory().setItemDirect(0, definition);
+        }
+        provider.rebuildAfterRecipeReload();
+        return provider;
+    }
+
+    private static void assertAdvertised(SingularPatternProviderBlockEntity provider,
+            MekanismKey red, MekanismKey yellow, MekanismKey orange) {
+        var patterns = provider.getAvailablePatterns();
+        require(patterns.size() == 1, "bound two-Pigment Pattern was not advertised");
+        var model = provider.getVerifiedProcessModel(patterns.get(0)).orElseThrow();
+        require(model.adapterId().equals(MekanismRecipeAdapter.ID)
+                        && model.recipeId().equals(RECIPE_ID)
+                        && model.inputsPerOperation().equals(Map.of(red, 2L, yellow, 3L))
+                        && model.outputsPerOperation().equals(Map.of(orange, 17L)),
+                "advertised two-Pigment Pattern changed Core quantities");
+    }
+
+    private static Recipe<?> recipe(long left, long right, long output) {
+        var serializer = ForgeRegistries.RECIPE_SERIALIZERS.getValue(TYPE_ID);
+        require(serializer != null, "pigment_mixing serializer is unavailable");
+        String json = "{\"leftInput\":{\"amount\":" + left
+                + ",\"pigment\":\"mekanism:red\"},\"rightInput\":{\"amount\":" + right
+                + ",\"pigment\":\"mekanism:yellow\"},\"output\":{\"amount\":" + output
+                + ",\"pigment\":\"mekanism:orange\"}}";
+        return serializer.fromJson(RECIPE_ID, JsonParser.parseString(json).getAsJsonObject());
+    }
+
+    private static void replace(RecipeManager manager, List<Recipe<?>> original, Recipe<?> replacement) {
+        List<Recipe<?>> next = new ArrayList<>(original);
+        next.removeIf(recipe -> recipe.getId().equals(RECIPE_ID));
+        if (replacement != null) {
+            next.add(replacement);
+        }
+        manager.replaceRecipes(next);
+    }
+
+    private static void rebuild(SingularPatternProviderBlockEntity provider) {
+        provider.invalidateForRecipeReload();
+        provider.rebuildAfterRecipeReload();
+    }
+
+    private static MekanismKey key(String path) {
+        return MekanismKey.of(MekanismAPI.pigmentRegistry().getValue(id("mekanism", path)).getStack(1));
+    }
+
+    private static ResourceLocation id(String namespace, String path) {
+        return ResourceLocation.fromNamespaceAndPath(namespace, path);
+    }
+
+    private static void require(boolean condition, String message) {
+        if (!condition) {
+            throw new AssertionError(message);
+        }
+    }
+}
